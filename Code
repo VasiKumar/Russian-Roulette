@@ -1,0 +1,36 @@
+import tkinter as tk
+import random
+
+# List representing the chamber (1 = bullet, 0 = empty)
+ls = [0, 0, 0, 1, 0, 0]
+
+def rus():
+    global ls  # Access the global list
+    if ls:  # Ensure list is not empty
+        i = random.choice(ls)  # Pick a random chamber
+        if i == 0:
+            label2.config(text="Safe")
+            ls.remove(0)  # Remove one empty chamber
+        elif i == 1:
+            label2.config(text="Boom! Dead")
+            button.config(state=tk.DISABLED)  # Disable button after losing
+
+# Create the main window
+root = tk.Tk()
+root.geometry("320x320")
+root.title("Russian Roulette")
+
+# Label to display game title
+label = tk.Label(root, text="Let the game begin!", font=("Times New Roman", 20))
+label.pack(pady=10)
+
+# Button to play
+button = tk.Button(root, text="Click to start", command=rus)
+button.pack(pady=10)
+
+# Label to show game results
+label2 = tk.Label(root, text="", font=("Times New Roman", 20))
+label2.pack(pady=10)
+
+# Run Tkinter event loop
+root.mainloop()
